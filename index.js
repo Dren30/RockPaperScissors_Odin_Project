@@ -45,6 +45,8 @@ function getHumanChoice(){
         }
 
     }
+
+    return playerSelection;
     
 }
 
