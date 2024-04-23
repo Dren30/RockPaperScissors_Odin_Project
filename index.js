@@ -1,33 +1,37 @@
-const prompt = require("prompt-sync")();
+// const prompt = require("prompt-sync")();
+
+let humanScore = 0;
+let computerScore = 0;
+
 
 
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * (3 - 1 + 1) ) + 1;
     
     if (choice == 1) {
-        return "Rock"
+        return "rock"
     }else if (choice == 2) {
-        return "Paper"
+        return "paper"
     }else {
-        return "Scissors"
+        return "scissors"
     }
 }
 
 
-function rockPaperScissors(computerChoice){
+function getHumanChoice(){
     let wrongChoice = true; 
-    console.log('Make a choice (use the word): "rock" | "paper" | "scissors"');
+    alert('Make a choice (use the word): "rock" | "paper" | "scissors"');
     let playerSelection;
     
     
     while (wrongChoice) {
 
-        playerSelection = prompt("-->").toLowerCase();
+        playerSelection = prompt('"rock" | "paper" | "scissors"').toLowerCase();
         
         if (playerSelection !== ""){
         
             if ( playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissors") {
-                console.log('\nChoose a valid answer! Use the word "rock" | "paper" | "scissors"\n');
+                alert('\nChoose a valid answer! Use the word "rock" | "paper" | "scissors"\n');
                 
             }else{
 
@@ -37,13 +41,11 @@ function rockPaperScissors(computerChoice){
 
         }else{
 
-            console.log('\nEmpty choice not acceptable. \nChoose a valid answer! Use the word "rock" | "paper" | "scissors"\n');
+            alert('\nEmpty choice not acceptable. \nChoose a valid answer! Use the word "rock" | "paper" | "scissors"\n');
         }
-        
 
     }
     
 }
 
-rockPaperScissors(getComputerChoice());
-
+console.log(getHumanChoice());
