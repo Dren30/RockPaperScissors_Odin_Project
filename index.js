@@ -50,4 +50,25 @@ function getHumanChoice(){
     
 }
 
-console.log(getHumanChoice());
+function playRound(humanChoice, computerChoice) {
+
+            
+    if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
+
+        computerScore ++;
+        return `You Lose! ${computerChoice} beats ${humanChoice}`;
+    }
+
+    if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice === "paper" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice === "paper") {
+
+        humanScore ++;
+        return `You win! ${humanChoice} beats ${computerChoice}`;
+    }
+
+    if (computerChoice === humanChoice){
+        return `It's a draw. you both chose ${humanChoice}`
+    }
+
+}
+
+console.log(playRound(getHumanChoice(), getComputerChoice()));
