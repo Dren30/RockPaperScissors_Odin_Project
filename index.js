@@ -1,10 +1,5 @@
 // const prompt = require("prompt-sync")();
 
-let humanScore = 0;
-let computerScore = 0;
-
-
-
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * (3 - 1 + 1) ) + 1;
     
@@ -50,25 +45,55 @@ function getHumanChoice(){
     
 }
 
-function playRound(humanChoice, computerChoice) {
+
+function playGame() {
+
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound(humanChoice, computerChoice) {
 
             
-    if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
-
-        computerScore ++;
-        return `You Lose! ${computerChoice} beats ${humanChoice}`;
+        if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
+    
+            computerScore ++;
+            return `You Lose! ${computerChoice} beats ${humanChoice}`;
+        }
+    
+        if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice === "paper" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice === "paper") {
+    
+            humanScore ++;
+            return `You win! ${humanChoice} beats ${computerChoice}`;
+        }
+    
+        if (computerChoice === humanChoice){
+            return `It's a draw. you both chose ${humanChoice}`
+        }
+    
     }
 
-    if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice === "paper" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice === "paper") {
-
-        humanScore ++;
-        return `You win! ${humanChoice} beats ${computerChoice}`;
+    for (let i = 1; i <= 5; i++){
+        console.log(playRound(getHumanChoice(), getComputerChoice()));;
+        console.log(`Score\nYou: ${humanScore}\nComputer: ${computerScore}`);
     }
 
-    if (computerChoice === humanChoice){
-        return `It's a draw. you both chose ${humanChoice}`
+    if (humanScore > computerScore) {
+        console.log(`You won ${humanScore} - ${computerScore}`);
+        alert(`You won ${humanScore} - ${computerScore}`);
+    }
+
+    if (humanScore < computerScore) {
+        console.log(`You Lose ${computerScore} - ${humanScore}`);
+        alert(`You Lose ${computerScore} - ${humanScore}`);
+    }
+
+    if (humanScore === computerScore) {
+        console.log(`It's a draw ${humanScore} - ${computerScore}`);
+        alert(`It's a draw ${humanScore} - ${computerScore}`);
     }
 
 }
 
-console.log(playRound(getHumanChoice(), getComputerChoice()));
+playGame();
+
+
