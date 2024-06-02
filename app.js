@@ -12,88 +12,72 @@ function getComputerChoice() {
     }
 }
 
+function playRound(humanChoice, computerChoice) {
 
-function getHumanChoice(){
-    let wrongChoice = true; 
-    alert('Make a choice (use the word): "rock" | "paper" | "scissors"');
-    let playerSelection;
-    
-    
-    while (wrongChoice) {
+    if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
 
-        playerSelection = prompt('"rock" | "paper" | "scissors"').toLowerCase();
-        
-        if (playerSelection !== ""){
-        
-            if ( playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissors") {
-                alert('\nChoose a valid answer! Use the word "rock" | "paper" | "scissors"\n');
-                
-            }else{
-
-                wrongChoice = false;           
-                
-            }
-
-        }else{
-
-            alert('\nEmpty choice not acceptable. \nChoose a valid answer! Use the word "rock" | "paper" | "scissors"\n');
-        }
-
+        computerScore ++;
+        div_results.innerText = `You Lose! ${computerChoice} beats ${humanChoice}`;
     }
 
-    return playerSelection;
-    
+    if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice === "paper" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice === "paper") {
+
+        humanScore ++;
+        div_results.innerText = `You win! ${humanChoice} beats ${computerChoice}`;
+    }
+
+    if (computerChoice === humanChoice){
+        div_results.innerText = `It's a draw. you both chose ${humanChoice}`
+    }
+
+    div_results.innerText = div_results.innerText + `\n${humanScore} - ${computerScore}`
+
+    if (humanScore == 5) {
+        div_buttons.innerText = "";
+        div_results.innerText = `You Won!\nScore is ${humanScore}-${computerScore}`;
+    }
+
+    if (computerScore == 5) {
+        div_buttons.innerText = "";
+        div_results.innerText = `You Lost :c\nScore is ${computerScore}-${humanScore}`;
+    }
 }
 
+let humanScore = 0;
+let computerScore = 0;
 
-function playGame() {
 
-    let humanScore = 0;
-    let computerScore = 0;
+const rock_btn = document.createElement("button");
+rock_btn.innerText = "Rock";
+rock_btn.addEventListener("click", function(){
+    playRound("rock", getComputerChoice());
+})
 
-    function playRound(humanChoice, computerChoice) {
+const paper_btn = document.createElement("button");
+paper_btn.innerText = "Paper";
+paper_btn.addEventListener("click", function(){
+    playRound("paper", getComputerChoice());
+})
 
-            
-        if (computerChoice === "rock" && humanChoice === "scissors" || computerChoice === "paper" && humanChoice === "rock" || computerChoice === "scissors" && humanChoice === "paper") {
-    
-            computerScore ++;
-            return `You Lose! ${computerChoice} beats ${humanChoice}`;
-        }
-    
-        if (humanChoice === "rock" && computerChoice === "scissors" || humanChoice === "paper" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice === "paper") {
-    
-            humanScore ++;
-            return `You win! ${humanChoice} beats ${computerChoice}`;
-        }
-    
-        if (computerChoice === humanChoice){
-            return `It's a draw. you both chose ${humanChoice}`
-        }
-    
-    }
+const scissors_btn = document.createElement("button");
+scissors_btn.innerText = "Scissors";
+scissors_btn.addEventListener("click", function(){
+    playRound("scissors", getComputerChoice());
+})
 
-    for (let i = 1; i <= 5; i++){
-        console.log(playRound(getHumanChoice(), getComputerChoice()));;
-        console.log(`Score\nYou: ${humanScore}\nComputer: ${computerScore}`);
-    }
+const div_buttons = document.createElement("div");
 
-    if (humanScore > computerScore) {
-        console.log(`You won ${humanScore} - ${computerScore}`);
-        alert(`You won ${humanScore} - ${computerScore}`);
-    }
 
-    if (humanScore < computerScore) {
-        console.log(`You Lose ${computerScore} - ${humanScore}`);
-        alert(`You Lose ${computerScore} - ${humanScore}`);
-    }
+const div_results = document.createElement("div");
+div_results.innerText = "Choose your option \nFirst to 5 Wins!";
 
-    if (humanScore === computerScore) {
-        console.log(`It's a draw ${humanScore} - ${computerScore}`);
-        alert(`It's a draw ${humanScore} - ${computerScore}`);
-    }
+div_buttons.appendChild(rock_btn);
+div_buttons.appendChild(paper_btn);
+div_buttons.appendChild(scissors_btn);
 
-}
+const body = document.querySelector("body");
+body.appendChild(div_buttons);
+body.appendChild(div_results);
 
-playGame();
 
 
